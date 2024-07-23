@@ -7,14 +7,30 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+/**
+ * Manipulador global de exceções para a aplicação.
+ * Captura e trata exceções específicas para fornecer respostas apropriadas.
+ */
 @RestControllerAdvice
 public class RestExceptionHandler {
 
+    /**
+     * Trata exceções do tipo {@link PicPayException}.
+     *
+     * @param ex A exceção a ser tratada.
+     * @return Detalhes do problema encapsulados em um {@link ProblemDetail}.
+     */
     @ExceptionHandler(PicPayException.class)
     public ProblemDetail handlePicPayException(PicPayException ex) {
         return ex.toProblemDetail();
     }
 
+    /**
+     * Trata exceções de validação de argumento de método, como {@link MethodArgumentNotValidException}.
+     *
+     * @param ex A exceção de validação a ser tratada.
+     * @return Detalhes do problema encapsulados em um {@link ProblemDetail}.
+     */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ProblemDetail handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
 

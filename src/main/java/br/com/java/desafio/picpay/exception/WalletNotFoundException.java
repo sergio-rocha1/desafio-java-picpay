@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 
+/**
+ * Exceção lançada quando uma carteira não é encontrada pelo ID fornecido.
+ */
 @AllArgsConstructor
 public class WalletNotFoundException extends PicPayException {
 

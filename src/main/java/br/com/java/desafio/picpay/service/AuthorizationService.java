@@ -9,12 +9,21 @@ import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
+/**
+ * Serviço responsável pela verificação de autorização com o cliente de autorização.
+ */
 @Service
 @AllArgsConstructor
 public class AuthorizationService {
 
     private final AuthorizationClient authorizationClient;
 
+    /**
+     * Verifica se a autorização foi concedida pelo serviço de autorização.
+     *
+     * @return {@code true} se autorizado, {@code false} caso contrário.
+     * @throws PicPayException Se ocorrer um erro ao consultar o serviço de autorização ou se a resposta for inválida.
+     */
     public boolean isAuthorized() {
         ResponseEntity<AuthorizationResponse> authorized = authorizationClient.isAuthorized();
 

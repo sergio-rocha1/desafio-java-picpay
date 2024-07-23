@@ -15,6 +15,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.concurrent.CompletableFuture;
 
+/**
+ * Serviço responsável pela execução das transferências entre carteiras.
+ */
 @Service
 @AllArgsConstructor
 public class TransferService {
@@ -24,6 +27,16 @@ public class TransferService {
     private final NotificationService notificationService;
     private final WalletRepository walletRepository;
 
+    /**
+     * Realiza uma transferência de valores entre carteiras com base nos dados fornecidos.
+     *
+     * @param dto Dados da transferência a ser realizada, conforme definido em {@link TransferDTO}.
+     * @return Uma resposta {@link Transfer} contendo a transferência realizada.
+     * @throws WalletNotFoundException Se qualquer das carteiras especificadas não for encontrada.
+     * @throws TransferNotAllowedForTypeException Se a transferência não for permitida para o tipo de carteira do remetente.
+     * @throws InsufficientBalanceException Se o saldo da carteira remetente for insuficiente.
+     * @throws TransferNotAuthorizedException Se a transferência não for autorizada pelo serviço de autorização.
+     */
     @Transactional
     public Transfer transfer(TransferDTO dto) {
 
@@ -50,6 +63,15 @@ public class TransferService {
         return resultadoTransferencia;
     }
 
+    /**
+     * Valida os dados da transferência e verifica se ela pode ser realizada.
+     *
+     * @param dto Dados da transferência a ser validada, conforme definido em {@link TransferDTO}.
+     * @param sender Carteira que está enviando os fundos.
+     * @throws TransferNotAllowedForTypeException Se a transferência não é permitida para o tipo de carteira do remetente.
+     * @throws InsufficientBalanceException Se o saldo da carteira remetente é insuficiente para a transferência.
+     * @throws TransferNotAuthorizedException Se a transferência não é autorizada pelo serviço de autorização.
+     */
     private void validateTransfer(TransferDTO dto, Wallet sender) {
         if(!sender.isTransferAllowedForWalletType()) {
             throw new TransferNotAllowedForTypeException();

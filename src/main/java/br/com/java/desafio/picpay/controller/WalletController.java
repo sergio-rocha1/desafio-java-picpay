@@ -10,12 +10,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Controlador responsável pelas operações relacionadas às carteiras.
+ * Fornece endpoints para criar novas carteiras.
+ */
 @RestController
 @AllArgsConstructor
 public class WalletController {
 
     private final WalletService walletService;
 
+    /**
+     * Cria uma nova carteira com base nos dados fornecidos.
+     *
+     * @param dto Dados da carteira a ser criada, conforme definido em {@link CreateWalletDTO}.
+     * @return Uma resposta contendo a carteira criada.
+     */
     @PostMapping("/wallets")
     public ResponseEntity<Wallet> createWallet(@RequestBody @Valid CreateWalletDTO dto) {
         var wallet = walletService.createWallet(dto);

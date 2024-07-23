@@ -3,6 +3,9 @@ package br.com.java.desafio.picpay.exception;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 
+/**
+ * Exceção lançada quando há saldo insuficiente para realizar uma transferência.
+ */
 public class InsufficientBalanceException extends PicPayException{
 
     @Override

@@ -7,6 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+/**
+ * Serviço responsável pelo envio de notificações relacionadas a transferências.
+ */
 @Service
 @AllArgsConstructor
 public class NotificationService {
@@ -14,6 +17,11 @@ public class NotificationService {
     private static final Logger logger = LoggerFactory.getLogger(NotificationService.class);
     private final NotificationClient notificationClient;
 
+    /**
+     * Envia uma notificação sobre a transferência fornecida.
+     *
+     * @param transfer A transferência sobre a qual a notificação deve ser enviada.
+     */
     public void sendNotification(Transfer transfer) {
         try {
             logger.info("Enviando notificação de transação...");

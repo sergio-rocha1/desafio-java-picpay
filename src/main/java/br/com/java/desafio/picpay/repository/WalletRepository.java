@@ -1,0 +1,11 @@
+package br.com.java.desafio.picpay.repository;
+
+import br.com.java.desafio.picpay.entity.Wallet;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.Optional;
+
+public interface WalletRepository extends JpaRepository<Wallet, Long> {
+    Optional<Wallet> findByCpfCnpjOrEmail(String cpfCnpj, String email);
+
+}

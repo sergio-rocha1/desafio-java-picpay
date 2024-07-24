@@ -1,0 +1,20 @@
+version: '3.8'  # Versão do arquivo de configuração do Docker Compose
+
+services:
+  mysql:
+    image: mysql # Imagem do MySQL a ser utilizada
+    container_name: mysql  # Nome do container
+    ports:
+      - "3306:3306" # Mapeamento da porta 3306 do host para a porta 3306 do container
+    expose:
+      - "3306" # Porta exposta dentro da rede Docker
+    environment:
+      - MYSQL_USER=admin # Usuário do MySQL
+      - MYSQL_PASSWORD=123 # Senha do MySQL
+      - MYSQL_DATABASE=picpaydb # Nome do banco de dados a ser criado
+      - MYSQL_ROOT_PASSWORD=123 # Senha do usuário root do MySQL
+    volumes:
+      - db_data:/var/lib/mysql # Volume persistente para dados do MySQL
+
+volumes:
+  db_data: # Definição do volume persistente
